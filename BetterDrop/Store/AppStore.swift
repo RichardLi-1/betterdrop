@@ -4,11 +4,16 @@ import Combine
 
 @MainActor
 final class AppStore: ObservableObject {
+    // Singleton used by engine actors (QueueProcessor) to push state back to the UI.
+    // Views use @EnvironmentObject, not this singleton.
+    static var shared: AppStore = AppStore()
+
     @Published var devices: [Device] = []
     @Published var transfers: [Transfer] = []
     @Published var selectedDeviceID: UUID?
 
-    // Derived
+    // MARK: - Derived
+
     var pendingCount: Int { transfers.filter { $0.status == .queued || $0.status == .sending }.count }
     var activeTransfers: [Transfer] { transfers.filter { $0.status == .sending } }
 
@@ -18,22 +23,80 @@ final class AppStore: ObservableObject {
             .sorted { $0.queuedAt > $1.queuedAt }
     }
 
-    func device(for id: UUID) -> Device? {
-        devices.first { $0.id == id }
+    func device(for id: UUID) -> Device? { devices.first { $0.id == id } }
+
+    // MARK: - Engine startup
+
+    func startEngine() {
+        Task {
+            // Load persisted state from SQLite
+            if let savedDevices = try? await Database.shared.loadDevices() {
+                devices = savedDevices
+            }
+            if let savedTransfers = try? await Database.shared.loadTransfers() {
+                // Only restore non-terminal transfers; completed/cancelled are shown in history
+                transfers = savedTransfers
+            }
+
+            // Merge online state from DeviceRegistry into loaded devices
+            for id in DeviceRegistry.shared.onlineDeviceIDs {
+                if let idx = devices.firstIndex(where: { $0.id == id }) {
+                    devices[idx].isOnline = true
+                }
+            }
+
+            // Mirror DeviceRegistry discoveries into our device list
+            observeRegistry()
+
+            DeviceRegistry.shared.startDiscovery()
+            await QueueProcessor.shared.start()
+
+            // Try to send anything that was .queued when we last quit
+            for id in DeviceRegistry.shared.onlineDeviceIDs {
+                await QueueProcessor.shared.drainQueue(for: id)
+            }
+        }
     }
+
+    // MARK: - Sync DeviceRegistry → devices array
+
+    private func observeRegistry() {
+        NotificationCenter.default.addObserver(forName: .deviceOnline, object: nil, queue: .main) { [weak self] note in
+            guard let self, let id = note.object as? UUID else { return }
+            if let idx = self.devices.firstIndex(where: { $0.id == id }) {
+                self.devices[idx].isOnline = true
+                self.devices[idx].lastSeen = Date()
+            } else if let device = DeviceRegistry.shared.knownDevices[id] {
+                self.devices.append(device)
+            }
+        }
+        NotificationCenter.default.addObserver(forName: .deviceOffline, object: nil, queue: .main) { [weak self] note in
+            guard let self, let id = note.object as? UUID else { return }
+            if let idx = self.devices.firstIndex(where: { $0.id == id }) {
+                self.devices[idx].isOnline = false
+            }
+        }
+    }
+
+    // MARK: - Queue mutations (called by UI)
 
     func enqueue(files: [TransferFile], to deviceID: UUID) {
         let transfer = Transfer.queued(files: files, to: deviceID)
         transfers.insert(transfer, at: 0)
-        if let idx = devices.firstIndex(where: { $0.id == deviceID }),
-           devices[idx].isOnline {
-            startSending(transferID: transfer.id)
+
+        Task {
+            try? await Database.shared.insertTransfer(transfer)
+            // If device is already online, kick the queue immediately
+            if devices.first(where: { $0.id == deviceID })?.isOnline == true {
+                await QueueProcessor.shared.drainQueue(for: deviceID)
+            }
         }
     }
 
     func cancelTransfer(_ id: UUID) {
         guard let idx = transfers.firstIndex(where: { $0.id == id }) else { return }
         transfers[idx].status = .cancelled
+        Task { try? await Database.shared.updateStatus(.cancelled, for: id) }
     }
 
     func retryTransfer(_ id: UUID) {
@@ -41,37 +104,48 @@ final class AppStore: ObservableObject {
         transfers[idx].status = .queued
         transfers[idx].errorMessage = nil
         transfers[idx].retryCount += 1
-        if let deviceIdx = devices.firstIndex(where: { $0.id == transfers[idx].targetDeviceID }),
-           devices[deviceIdx].isOnline {
-            startSending(transferID: id)
+        let deviceID = transfers[idx].targetDeviceID
+        Task {
+            try? await Database.shared.updateStatus(.queued, for: id)
+            if devices.first(where: { $0.id == deviceID })?.isOnline == true {
+                await QueueProcessor.shared.drainQueue(for: deviceID)
+            }
         }
     }
 
-    // MARK: - Preview / simulation
+    // MARK: - Queue mutations (called by QueueProcessor)
 
-    private func startSending(transferID: UUID) {
+    func beginSending(transferID: UUID) {
         guard let idx = transfers.firstIndex(where: { $0.id == transferID }) else { return }
         transfers[idx].status = .sending
         transfers[idx].startedAt = Date()
-        simulateProgress(transferID: transferID)
     }
 
-    private func simulateProgress(transferID: UUID) {
-        Task {
-            var p = 0.0
-            while p < 1.0 {
-                try? await Task.sleep(nanoseconds: 100_000_000)
-                p = min(p + Double.random(in: 0.02...0.08), 1.0)
-                guard let idx = self.transfers.firstIndex(where: { $0.id == transferID }) else { return }
-                self.transfers[idx].progress = p
-            }
-            guard let idx = self.transfers.firstIndex(where: { $0.id == transferID }) else { return }
-            self.transfers[idx].status = .completed
-            self.transfers[idx].completedAt = Date()
-        }
+    func updateProgress(transferID: UUID, progress: Double) {
+        guard let idx = transfers.firstIndex(where: { $0.id == transferID }) else { return }
+        transfers[idx].progress = progress
     }
 
-    // MARK: - Preview data
+    func markCompleted(transferID: UUID) {
+        guard let idx = transfers.firstIndex(where: { $0.id == transferID }) else { return }
+        transfers[idx].status = .completed
+        transfers[idx].completedAt = Date()
+        transfers[idx].progress = 1
+    }
+
+    func markFailed(transferID: UUID, error: String) {
+        guard let idx = transfers.firstIndex(where: { $0.id == transferID }) else { return }
+        transfers[idx].status = .failed
+        transfers[idx].errorMessage = error
+    }
+
+    func requeueTransfer(_ id: UUID) {
+        guard let idx = transfers.firstIndex(where: { $0.id == id }) else { return }
+        transfers[idx].status = .queued
+        transfers[idx].errorMessage = nil
+    }
+
+    // MARK: - Preview
 
     static func preview() -> AppStore {
         let store = AppStore()
@@ -100,9 +174,6 @@ final class AppStore: ObservableObject {
             Transfer(id: UUID(), targetDeviceID: d0, files: [
                 TransferFile(id: UUID(), name: "Screenshot.png", size: 540_000, uti: "public.image", localURL: URL(fileURLWithPath: "/tmp/Screenshot.png")),
             ], status: .completed, queuedAt: Date().addingTimeInterval(-600), startedAt: Date().addingTimeInterval(-580), completedAt: Date().addingTimeInterval(-540), progress: 1, errorMessage: nil, retryCount: 0),
-            Transfer(id: UUID(), targetDeviceID: d2, files: [
-                TransferFile(id: UUID(), name: "Video.mov", size: 210_000_000, uti: "public.movie", localURL: URL(fileURLWithPath: "/tmp/Video.mov")),
-            ], status: .failed, queuedAt: Date().addingTimeInterval(-7000), startedAt: Date().addingTimeInterval(-6800), completedAt: nil, progress: 0.23, errorMessage: "Connection timed out", retryCount: 1),
         ]
         return store
     }
