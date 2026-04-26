@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleIdentifier</key>
+    <string>app.betterdrop.mac</string>
+    <key>CFBundleName</key>
+    <string>BetterDrop</string>
+    <key>CFBundleDisplayName</key>
+    <string>BetterDrop</string>
+    <key>CFBundleShortVersionString</key>
+    <string>1.0</string>
+    <key>CFBundleVersion</key>
+    <string>1</string>
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+    <key>LSMinimumSystemVersion</key>
+    <string>13.0</string>
+    <key>NSPrincipalClass</key>
+    <string>NSApplication</string>
+    <key>NSHighResolutionCapable</key>
+    <true/>
+    <key>LSUIElement</key>
+    <false/>
+
+    <!-- Bonjour service types we browse and advertise -->
+    <key>NSBonjourServices</key>
+    <array>
+        <string>_betterdrop._tcp</string>
+    </array>
+
+    <!-- Local network access — required for NWBrowser/NWListener -->
+    <key>NSLocalNetworkUsageDescription</key>
+    <string>BetterDrop needs local network access to discover nearby devices and send files directly.</string>
+
+    <!-- Used for file drop — no entitlement needed, but callers need access -->
+    <key>NSDocumentsFolderUsageDescription</key>
+    <string>BetterDrop reads files you drop onto it to send them to other devices.</string>
+
+    <!-- Supports opening files via drag-and-drop from Finder -->
+    <key>CFBundleDocumentTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeName</key>
+            <string>Any File</string>
+            <key>CFBundleTypeRole</key>
+            <string>Viewer</string>
+            <key>LSItemContentTypes</key>
+            <array>
+                <string>public.item</string>
+            </array>
+        </dict>
+    </array>
+</dict>
+</plist>

@@ -2,28 +2,31 @@ import SwiftUI
 
 @main
 struct BetterDropApp: App {
-    @StateObject private var store = AppStore.preview()
-    @State private var menuBarPopoverShown = false
+    @StateObject private var store: AppStore = {
+        // Publish the singleton before any engine actors can call back into it
+        let s = AppStore()
+        AppStore.shared = s
+        return s
+    }()
 
     var body: some Scene {
-        // Main queue manager window (opened from menu bar or Dock)
         Window("BetterDrop", id: "main") {
             ContentView()
                 .environmentObject(store)
-                .frame(minWidth: 700, minHeight: 480)
+                .frame(minWidth: 560, minHeight: 400)
+                .onAppear { store.startEngine() }
         }
         .windowStyle(.hiddenTitleBar)
         .windowToolbarStyle(.unified(showsTitle: false))
-        .defaultSize(width: 860, height: 560)
+        .defaultSize(width: 760, height: 520)
         .commands {
             CommandGroup(replacing: .newItem) {}
         }
 
-        // Menu bar extra
         MenuBarExtra {
             MenuBarPopoverView()
                 .environmentObject(store)
-                .frame(width: 320)
+                .frame(width: 300)
         } label: {
             MenuBarLabel(pendingCount: store.pendingCount)
         }
@@ -31,13 +34,14 @@ struct BetterDropApp: App {
     }
 }
 
-// The icon + badge in the system menu bar
 struct MenuBarLabel: View {
     let pendingCount: Int
 
     var body: some View {
         HStack(spacing: 3) {
-            Image(systemName: pendingCount > 0 ? "arrow.up.arrow.down.circle.fill" : "arrow.up.arrow.down.circle")
+            Image(systemName: pendingCount > 0
+                  ? "arrow.up.arrow.down.circle.fill"
+                  : "arrow.up.arrow.down.circle")
                 .symbolRenderingMode(.hierarchical)
                 .foregroundStyle(pendingCount > 0 ? Color.accentColor : .secondary)
             if pendingCount > 0 {

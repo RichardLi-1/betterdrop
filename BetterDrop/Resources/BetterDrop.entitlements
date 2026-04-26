@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- App Sandbox — required for Mac App Store -->
+    <key>com.apple.security.app-sandbox</key>
+    <true/>
+
+    <!-- Outbound network connections (TCP relay, NWConnection) -->
+    <key>com.apple.security.network.client</key>
+    <true/>
+
+    <!-- Incoming connections for LAN listener (NWListener) -->
+    <key>com.apple.security.network.server</key>
+    <true/>
+
+    <!-- Read-only access to user-selected files dropped onto the app -->
+    <key>com.apple.security.files.user-selected.read-only</key>
+    <true/>
+
+    <!-- Needed for staging files in the app's container between enqueue and send -->
+    <key>com.apple.security.files.downloads.read-write</key>
+    <true/>
+
+    <!-- Bluetooth for AWDL/BLE discovery  -->
+    <key>com.apple.security.device.bluetooth</key>
+    <true/>
+</dict>
+</plist>
