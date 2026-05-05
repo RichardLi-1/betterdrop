@@ -107,7 +107,7 @@ actor QueueProcessor {
 
             // Success
             await store.markCompleted(transferID: transfer.id)
-            await Database.shared.markCompleted(transferID: transfer.id)
+            try? await Database.shared.markCompleted(transferID: transfer.id)
 
         } catch {
             await markFailed(transfer: transfer, store: store, error: error)
@@ -117,7 +117,7 @@ actor QueueProcessor {
     private func markFailed(transfer: Transfer, store: AppStore, error: Error) async {
         let message = (error as? LocalizedError)?.errorDescription ?? error.localizedDescription
         await store.markFailed(transferID: transfer.id, error: message)
-        await Database.shared.markFailed(transferID: transfer.id, error: message)
+        try? await Database.shared.markFailed(transferID: transfer.id, error: message)
         scheduleRetry(transfer: transfer)
     }
 

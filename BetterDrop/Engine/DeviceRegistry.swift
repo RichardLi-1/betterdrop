@@ -196,8 +196,7 @@ final class DeviceRegistry: ObservableObject {
     // MARK: - TXT record helper
 
     private func txtValue(_ result: NWBrowser.Result, key: String) -> String? {
-        guard case .service(_, _, _, let metadata) = result.endpoint else { return nil }
-        if case .bonjour(let txt) = metadata {
+        if case .bonjour(let txt) = result.metadata {
             return txt[key]
         }
         return nil

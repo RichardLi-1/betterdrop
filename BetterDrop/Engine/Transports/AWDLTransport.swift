@@ -1,5 +1,6 @@
 import Foundation
 import AppKit
+import Network
 
 // Wraps macOS native AirDrop via NSSharingService.
 //
@@ -22,7 +23,10 @@ final class AWDLTransport: NSObject, FileTransport, NSSharingServiceDelegate {
         // AirDrop is available if the AWDL interface is up and the device
         // was seen recently via Bonjour on AWDL.
         guard NSSharingService(named: .sendViaAirDrop) != nil else { return false }
-        return AWDLReachabilityMonitor.shared.isAWDLUp && DeviceRegistry.shared.isReachableViaAWDL(device)
+        let reachableViaRegistry = await MainActor.run {
+            DeviceRegistry.shared.isReachableViaAWDL(device)
+        }
+        return AWDLReachabilityMonitor.shared.isAWDLUp && reachableViaRegistry
     }
 
     func send(

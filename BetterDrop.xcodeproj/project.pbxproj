@@ -1,0 +1,249 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		55497F0FF98F46C8B34FC69E /* BetterDropApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AF208FFC42A447390A251B9 /* BetterDropApp.swift */; };
+		D0902F068CBE4BE194287A2C /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 768E2F2B9A18487DBFA7BCBD /* AppStore.swift */; };
+		C89436E45341492DAF3B5EA6 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F72475F6E7E47D5A9B1DA31 /* Device.swift */; };
+		32E3AEE430194B83B7ED364B /* Transfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC87522AA804DBC9DDC8349 /* Transfer.swift */; };
+		A5017598370745B3B5BA55A1 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275A05A7A5A946C9B43FD809 /* Database.swift */; };
+		9B6FC9BF1A194B31B7551FF9 /* QueueProcessor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A97F60B70C244F596FB0285 /* QueueProcessor.swift */; };
+		16CBCEB2B1B74A06999EA274 /* DeviceRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 02909F4CF978481983388BC7 /* DeviceRegistry.swift */; };
+		549692550DB141B8AFE2A1FE /* RelayTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4D7A0A93C04A94B3164A0D /* RelayTransport.swift */; };
+		6180DFD4E5C94E60990FA923 /* AWDLTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = B695E948BF6644069D93DDC0 /* AWDLTransport.swift */; };
+		239306726F214624A3F36930 /* TCPDirectTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451F415209024440BBBB70CB /* TCPDirectTransport.swift */; };
+		68A62EFC579C4E5AAB7997FC /* TransportProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADC020D2178D4F2B80E6773E /* TransportProtocol.swift */; };
+		8C3F9D08641042D181B8DAE4 /* SharedComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5706A47ADB55411D9B641332 /* SharedComponents.swift */; };
+		46780E10AC1F435CB327BEF9 /* MenuBarPopoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD17E99D916A44F1B545473D /* MenuBarPopoverView.swift */; };
+		A583AEFC14E24E3F957D0A01 /* QueueSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7CDEF9121094BFEB1D8B47F /* QueueSheetView.swift */; };
+		879D1AD4042D46CE8C128E0D /* DeviceCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 624A933CDCD84620911037F1 /* DeviceCardView.swift */; };
+		15068CCDD0114CD5A57CB63C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01BBE654EEA94F1997B70B37 /* ContentView.swift */; };
+		BBB22A6A920F45FA9AB17C10 /* TransferRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E205520C384E53B0793E50 /* TransferRowView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AD2AB9C3BDDD481B9F7ED7D4 /* BetterDrop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BetterDrop.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6AF208FFC42A447390A251B9 /* BetterDropApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BetterDropApp.swift; sourceTree = "<group>"; };
+		768E2F2B9A18487DBFA7BCBD /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
+		4F72475F6E7E47D5A9B1DA31 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		0BC87522AA804DBC9DDC8349 /* Transfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transfer.swift; sourceTree = "<group>"; };
+		275A05A7A5A946C9B43FD809 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		0A97F60B70C244F596FB0285 /* QueueProcessor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueProcessor.swift; sourceTree = "<group>"; };
+		02909F4CF978481983388BC7 /* DeviceRegistry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceRegistry.swift; sourceTree = "<group>"; };
+		6D4D7A0A93C04A94B3164A0D /* RelayTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelayTransport.swift; sourceTree = "<group>"; };
+		B695E948BF6644069D93DDC0 /* AWDLTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AWDLTransport.swift; sourceTree = "<group>"; };
+		451F415209024440BBBB70CB /* TCPDirectTransport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TCPDirectTransport.swift; sourceTree = "<group>"; };
+		ADC020D2178D4F2B80E6773E /* TransportProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportProtocol.swift; sourceTree = "<group>"; };
+		5706A47ADB55411D9B641332 /* SharedComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedComponents.swift; sourceTree = "<group>"; };
+		FD17E99D916A44F1B545473D /* MenuBarPopoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarPopoverView.swift; sourceTree = "<group>"; };
+		D7CDEF9121094BFEB1D8B47F /* QueueSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QueueSheetView.swift; sourceTree = "<group>"; };
+		624A933CDCD84620911037F1 /* DeviceCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceCardView.swift; sourceTree = "<group>"; };
+		01BBE654EEA94F1997B70B37 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		88E205520C384E53B0793E50 /* TransferRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferRowView.swift; sourceTree = "<group>"; };
+		B20D127A88C34EB8BBAB340F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AD41962761D94306A20AAB64 /* BetterDrop.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BetterDrop.entitlements; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8A1C512491614686B012A695 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = ();
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F595F3B18FD44FDC9283DFB8 /* Models */ = {isa = PBXGroup; children = (4F72475F6E7E47D5A9B1DA31, 0BC87522AA804DBC9DDC8349); name = Models; path = Models; sourceTree = "<group>"; };
+		3DB3338A21D74DF5810DFB75 /* Store */ = {isa = PBXGroup; children = (768E2F2B9A18487DBFA7BCBD); name = Store; path = Store; sourceTree = "<group>"; };
+		479575FBBDAC498BBEC5BA2A /* Transports */ = {isa = PBXGroup; children = (6D4D7A0A93C04A94B3164A0D, B695E948BF6644069D93DDC0, 451F415209024440BBBB70CB, ADC020D2178D4F2B80E6773E); name = Transports; path = Transports; sourceTree = "<group>"; };
+		1702B955771B43CAA19C0714 /* Engine */ = {isa = PBXGroup; children = (0A97F60B70C244F596FB0285, 02909F4CF978481983388BC7, 479575FBBDAC498BBEC5BA2A); name = Engine; path = Engine; sourceTree = "<group>"; };
+		534FBE20BBE64EC49CF46154 /* Views */ = {isa = PBXGroup; children = (5706A47ADB55411D9B641332, FD17E99D916A44F1B545473D, D7CDEF9121094BFEB1D8B47F, 624A933CDCD84620911037F1, 01BBE654EEA94F1997B70B37, 88E205520C384E53B0793E50); name = Views; path = Views; sourceTree = "<group>"; };
+		1C2D3E4F5A6B7890ABCDEF12 /* Persistence */ = {isa = PBXGroup; children = (275A05A7A5A946C9B43FD809); name = Persistence; path = Persistence; sourceTree = "<group>"; };
+		AEECD30FDA424D5E9117BB83 /* Resources */ = {isa = PBXGroup; children = (B20D127A88C34EB8BBAB340F, AD41962761D94306A20AAB64); name = Resources; path = Resources; sourceTree = "<group>"; };
+		7154D887CF104857B8893FC6 /* BetterDrop */ = {isa = PBXGroup; children = (6AF208FFC42A447390A251B9, F595F3B18FD44FDC9283DFB8, 3DB3338A21D74DF5810DFB75, 1702B955771B43CAA19C0714, 1C2D3E4F5A6B7890ABCDEF12, 534FBE20BBE64EC49CF46154, AEECD30FDA424D5E9117BB83); name = BetterDrop; path = BetterDrop; sourceTree = "<group>"; };
+		36AE0FC3E9A4401DAEE244DC /* Products */ = {isa = PBXGroup; children = (AD2AB9C3BDDD481B9F7ED7D4 /* BetterDrop.app */); name = Products; sourceTree = "<group>"; };
+		B8838533D08A4B218442ED2B = {isa = PBXGroup; children = (7154D887CF104857B8893FC6 /* BetterDrop */, 36AE0FC3E9A4401DAEE244DC /* Products */); sourceTree = "<group>"; };
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		06E80971094C4CD9B00D7171 /* BetterDrop */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 32A49913B77641B7924C129D /* Build configuration list for PBXNativeTarget "BetterDrop" */;
+			buildPhases = (
+				25D1712E006447019B8D7925 /* Sources */,
+				8A1C512491614686B012A695 /* Frameworks */,
+				7C3E08EC366D48D3AA9D4093 /* Resources */,
+			);
+			buildRules = ();
+			dependencies = ();
+			name = BetterDrop;
+			productName = BetterDrop;
+			productReference = AD2AB9C3BDDD481B9F7ED7D4 /* BetterDrop.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ECA7A30477BC405A95B7A696 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {LastSwiftUpdateCheck = 1500; LastUpgradeCheck = 1500; TargetAttributes = {06E80971094C4CD9B00D7171 = {CreatedOnToolsVersion = 15.0;};};};
+			buildConfigurationList = 7CF80CAEF77F433D8280BBBC /* Build configuration list for PBXProject "BetterDrop" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (en, Base);
+			mainGroup = B8838533D08A4B218442ED2B;
+			productRefGroup = 36AE0FC3E9A4401DAEE244DC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (06E80971094C4CD9B00D7171 /* BetterDrop */);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7C3E08EC366D48D3AA9D4093 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = ();
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		25D1712E006447019B8D7925 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55497F0FF98F46C8B34FC69E /* BetterDropApp.swift in Sources */,
+				D0902F068CBE4BE194287A2C /* AppStore.swift in Sources */,
+				C89436E45341492DAF3B5EA6 /* Device.swift in Sources */,
+				32E3AEE430194B83B7ED364B /* Transfer.swift in Sources */,
+				A5017598370745B3B5BA55A1 /* Database.swift in Sources */,
+				9B6FC9BF1A194B31B7551FF9 /* QueueProcessor.swift in Sources */,
+				16CBCEB2B1B74A06999EA274 /* DeviceRegistry.swift in Sources */,
+				549692550DB141B8AFE2A1FE /* RelayTransport.swift in Sources */,
+				6180DFD4E5C94E60990FA923 /* AWDLTransport.swift in Sources */,
+				239306726F214624A3F36930 /* TCPDirectTransport.swift in Sources */,
+				68A62EFC579C4E5AAB7997FC /* TransportProtocol.swift in Sources */,
+				8C3F9D08641042D181B8DAE4 /* SharedComponents.swift in Sources */,
+				46780E10AC1F435CB327BEF9 /* MenuBarPopoverView.swift in Sources */,
+				A583AEFC14E24E3F957D0A01 /* QueueSheetView.swift in Sources */,
+				879D1AD4042D46CE8C128E0D /* DeviceCardView.swift in Sources */,
+				15068CCDD0114CD5A57CB63C /* ContentView.swift in Sources */,
+				BBB22A6A920F45FA9AB17C10 /* TransferRowView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C9FD26C722454E3EBA4B5162 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		FC5A9ED666BF4260B90B511D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ENABLE_MODULES = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		187316A2CCAE41EAA957D6D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_ENTITLEMENTS = BetterDrop/Resources/BetterDrop.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = BetterDrop/Resources/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "$(inherited) -enable-experimental-feature StrictConcurrency";
+				PRODUCT_BUNDLE_IDENTIFIER = app.betterdrop.mac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F2178757DA984C06BAA4CA2D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CODE_SIGN_ENTITLEMENTS = BetterDrop/Resources/BetterDrop.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = BetterDrop/Resources/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "$(inherited) -enable-experimental-feature StrictConcurrency";
+				PRODUCT_BUNDLE_IDENTIFIER = app.betterdrop.mac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7CF80CAEF77F433D8280BBBC /* Build configuration list for PBXProject "BetterDrop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C9FD26C722454E3EBA4B5162 /* Debug */,
+				FC5A9ED666BF4260B90B511D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		32A49913B77641B7924C129D /* Build configuration list for PBXNativeTarget "BetterDrop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				187316A2CCAE41EAA957D6D7 /* Debug */,
+				F2178757DA984C06BAA4CA2D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ECA7A30477BC405A95B7A696 /* Project object */;
+}

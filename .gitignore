@@ -1,0 +1,21 @@
+/.build/
+
+# Xcode local/user data
+DerivedData/
+.derivedData/
+*.xcresult
+*.xccheckout
+*.moved-aside
+*.xcuserstate
+**/*.xcuserdata/
+
+# macOS
+.DS_Store
+
+# Local logs/artifacts
+*.log
+
+# Go local binaries/coverage
+relay/relay
+relay/*.out
+coverage.out
